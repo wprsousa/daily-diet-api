@@ -1,8 +1,10 @@
 # 🍽️ Daily Diet API - Desafio 02 | Rocketseat
 
-Este projeto é uma solução para o **Desafio 02** do módulo **Desenvolvimento Avançado com Flask** da trilha da Rocketseat.
+Este projeto é uma solução para o **Desafio 02** do módulo **Desenvolvimento Avançado com Flask** da trilha da
+Rocketseat.
 
-A aplicação é uma API para controle de refeições diárias, com funcionalidades para registrar, listar, editar e excluir refeições de um usuário, verificando se estão dentro ou fora da dieta.
+A aplicação é uma API para controle de refeições diárias, com funcionalidades para registrar, listar, editar e excluir
+refeições de um usuário, verificando se estão dentro ou fora da dieta.
 
 ---
 
@@ -11,20 +13,21 @@ A aplicação é uma API para controle de refeições diárias, com funcionalida
 - Python 3.11+
 - Flask
 - Flask SQLAlchemy
-- Flask Migrate
-- SQLite (ou PostgreSQL, opcional)
+- Flask Login
+- Flask Marshmallow
+- Bcrypt
+- SQLite
 - pytest (para testes)
-- Flask Marshmallow (opcional, para serialização)
 
 ---
 
 ## ⚙️ Funcionalidades
 
 - ✅ Criar uma nova refeição com:
-  - Nome
-  - Descrição
-  - Data e hora
-  - Indicador de se está dentro ou fora da dieta
+    - Nome
+    - Descrição
+    - Data e hora
+    - Indicador de se está dentro ou fora da dieta
 - ✏️ Editar qualquer refeição
 - ❌ Excluir refeições
 - 📋 Listar todas as refeições de um usuário
@@ -72,17 +75,22 @@ flask run
 
 ---
 
-## 📮 Rotas da API (exemplos)
+## 📮 Rotas da API
 
-| Método | Rota                | Descrição                          |
-|--------|---------------------|------------------------------------|
-| POST   | `/refeicoes`        | Criar nova refeição                |
-| GET    | `/refeicoes`        | Listar todas as refeições          |
-| GET    | `/refeicoes/<id>`   | Visualizar uma refeição específica |
-| PUT    | `/refeicoes/<id>`   | Editar uma refeição                |
-| DELETE | `/refeicoes/<id>`   | Deletar uma refeição               |
-
-> A estrutura final pode variar conforme o design do projeto.
+| Método   | Rota                        | Descrição                                                                             |
+|----------|-----------------------------|---------------------------------------------------------------------------------------|
+| POST     | `/refeicoes`                | Criar nova refeição                                                                   |
+| GET      | `/refeicoes`                | Listar todas as refeições                                                             |
+| GET      | `/refeicoes/<id>`           | Visualizar uma refeição específica                                                    |
+| PUT      | `/refeicoes/<id>`           | Editar uma refeição                                                                   |
+| DELETE   | `/refeicoes/<id>`           | Deletar uma refeição                                                                  |
+| -------- | --------------------------- | ------------------------------------------------------------------------------------- |
+| POST     | `/login`                    | Faz login do usuário                                                                  |
+| GET      | `/logout`                   | Faz logout do usuário autenticado                                                     |
+| POST     | `/user`                     | Cria um novo usuário                                                                  |
+| GET      | `/user/<int:id_user>`       | Retorna dados de um usuário específico (requer autenticação)                          |
+| PUT      | `/user/<int:id_user>`       | Atualiza a senha de um usuário específico (requer autenticação)                       |
+| DELETE   | `/user/<int:id_user>`       | Deleta um usuário específico (apenas admin, não pode deletar a si mesmo)              |
 
 ---
 
@@ -96,20 +104,17 @@ pytest
 
 ---
 
-## 📁 Estrutura Sugerida
+## 📁 Estrutura do projeto
 
 ```text
 .
-├── app/
+├── src/
 │   ├── models/
 │   ├── routes/
-│   ├── services/
 │   ├── schemas/
-│   └── __init__.py
-├── migrations/
+│   ├── services/
 ├── tests/
-├── config.py
-├── run.py
+├── app.py
 └── requirements.txt
 ```
 
@@ -122,15 +127,14 @@ Durante o desafio, foram praticados:
 - Organização de projeto Flask em estrutura modular
 - Criação de API RESTful
 - Manipulação de banco de dados com SQLAlchemy
-- Criação e execução de migrações com Flask-Migrate
-- Validação e serialização de dados
+- Criptografia de senha com Bcrypt
 - Desenvolvimento com testes automatizados
 
 ---
 
 ## 📌 Entrega
 
-URL do projeto: [https://github.com/seu-usuario/daily-diet-api](https://github.com/seu-usuario/daily-diet-api)
+URL do projeto: [https://github.com/wprsouss/daily-diet-api](https://github.com/wprsousa/daily-diet-api)
 
 ---
 
