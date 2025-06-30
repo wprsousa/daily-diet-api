@@ -3,6 +3,7 @@ from flask_login import current_user, login_required
 
 from src.schemas.diary_schema import DiarySchema
 from src.services.diary_service import DiaryService
+from src.logger import logger
 
 diary_bp = Blueprint("diary", __name__)
 diary_schema = DiarySchema()
@@ -19,6 +20,7 @@ def create_meal():
         return jsonify(errors), 400
 
     meal = DiaryService.create_meal(current_user.id, data)
+    logger.info(f"Refeição cadastrada com sucesso! - {meal.name}")
     return jsonify({"message": "Refeição cadastrada com sucesso!", "id": meal.id}), 201
 
 

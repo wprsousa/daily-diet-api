@@ -5,6 +5,7 @@ from flask_login import LoginManager
 from database.database import db
 from src.models.user import User
 from src.routes import register_routes
+from src.logger import logger
 
 ma = Marshmallow()
 
@@ -20,10 +21,13 @@ register_routes(app)
 
 login_manager.login_view = "login"
 
+logger.info("Aplicação Iniciando")
+
 
 @login_manager.user_loader
 def load_user(user_id):
-    return User.query.get(user_id)
+    user = db.session.get(User, user_id)
+    return user
 
 
 if __name__ == "__main__":

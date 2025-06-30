@@ -42,7 +42,7 @@ def create_user():
         user = User(username=username, password=hashed_password, role="user")
         db.session.add(user)
         db.session.commit()
-        return jsonify({"message": "Usuário cadastrado com sucesso"})
+        return jsonify({"message": "Usuário cadastrado com sucesso"}), 201
 
     return jsonify({"message": "Dados inválidos"}), 400
 
@@ -50,7 +50,7 @@ def create_user():
 @user_bp.route("/user/<int:id_user>", methods=["GET"])
 @login_required
 def read_user(id_user):
-    user = User.query.get(id_user)
+    user = db.session.get(User, id_user)
 
     if user:
         return {"username": user.username}
@@ -62,7 +62,7 @@ def read_user(id_user):
 @login_required
 def update_user(id_user):
     data = request.json
-    user = User.query.get(id_user)
+    user = db.session.get(User, id_user)
 
     if id_user != current_user.id and current_user.role == "user":
         return jsonify({"message": "Operação não permitida"}), 403
@@ -79,9 +79,9 @@ def update_user(id_user):
 @user_bp.route("/user/<int:id_user>", methods=["DELETE"])
 @login_required
 def delete_user(id_user):
-    user = User.query.get(id_user)
+    user = db.session.get(User, id_user)
 
-    if create_user.role != "admin":
+    if current_user.role != "admin":
         return jsonify({"message": "Operação não permitida"}), 403
     if id_user == current_user.id:
         return jsonify({"message": "Deleção não permitida"}), 403

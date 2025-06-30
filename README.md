@@ -1,5 +1,7 @@
 # 🍽️ Daily Diet API - Desafio 02 | Rocketseat
 
+![Cobertura de Testes](https://img.shields.io/badge/cobertura-100%25-brightgreen)
+
 Este projeto é uma solução para o **Desafio 02** do módulo **Desenvolvimento Avançado com Flask** da trilha da
 Rocketseat.
 
@@ -100,6 +102,18 @@ Execute os testes com:
 
 ```bash
 pytest
+```
+
+---
+
+## ✅ Cobertura de Testes
+
+Este projeto utiliza `pytest` com o plugin `pytest-cov` para medir a cobertura dos testes automatizados.
+
+### 🔍 Como executar:
+
+```bash
+pytest --cov=src --cov-report=term-missing
 ```
 
 ---
